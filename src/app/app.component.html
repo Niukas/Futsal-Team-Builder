@@ -1,14 +1,13 @@
-<ngx-cookie-consent></ngx-cookie-consent>
 <div class="container">
   @if(isFirst){
   <div class="pre-generate-player-forms">
     <form (submit)="generateFormFields()">
       <mat-form-field appearance="outline">
-        <mat-label># of Players</mat-label>
+        <mat-label># de jugadores</mat-label>
         <input matInput type="number" [(ngModel)]="numOfPlayers" name="something" />
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit" [disabled]="numOfPlayers < 1">
-        Create
+        Crear
       </button>
       <button mat-raised-button color="warn" type="button" (click)="test()">
         Demo
@@ -17,7 +16,7 @@
   </div>
   } @else {
   <div class="add-new-form-container">
-    <span>{{ numOfPlayers }} Players</span>
+    <span>{{ numOfPlayers }} Jugadores</span>
     <button mat-mini-fab color="accent" (click)="addNewPlayer()">
       <mat-icon>add</mat-icon>
     </button>
@@ -32,11 +31,11 @@
           )
         ">
         <mat-form-field>
-          <mat-label>Player Name {{ $index + 1 }}</mat-label>
+          <mat-label>Nombre Jugador {{ $index + 1 }}</mat-label>
           <input formControlName="name" matInput type="text" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Position</mat-label>
+          <mat-label>Posicion</mat-label>
           <mat-select formControlName="position">
             @for (position of positions; track positions) {
             <mat-option [value]="position">{{ position }}</mat-option>
@@ -44,7 +43,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Attack Rating</mat-label>
+          <mat-label>Ataque</mat-label>
           <mat-select formControlName="attackRating">
             @for (rating of ratings; track ratings) {
             <mat-option [value]="rating">{{ rating }}</mat-option>
@@ -52,7 +51,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Defence Rating</mat-label>
+          <mat-label>Defensa</mat-label>
           <mat-select formControlName="defenceRating">
             @for (rating of ratings; track ratings) {
             <mat-option [value]="rating">{{ rating }}</mat-option>
@@ -60,7 +59,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Condition Rating</mat-label>
+          <mat-label>Estado</mat-label>
           <mat-select formControlName="conditionRating">
             @for (rating of ratings; track ratings) {
             <mat-option [value]="rating">{{ rating }}</mat-option>
@@ -76,28 +75,28 @@
     </ng-container>
     <div class="button-container">
       <button mat-raised-button color="accent" (click)="generateTeams()" [disabled]="numOfPlayers < 1" id="generate">
-        Generate
+        Generar
       </button>
       <button mat-raised-button (click)="clean()" [disabled]="numOfPlayers < 1">
-        Clean
+        Limpiar
       </button>
-      <mat-slide-toggle [(ngModel)]="forcedBalance" [ngModelOptions]="{standalone: true}">Force Balanced Teams</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="forcedBalance" [ngModelOptions]="{standalone: true}">Forzar Equipos Balanceados</mat-slide-toggle>
     </div>
   </ng-container>
   @if(isGenerated){
   <hr class="solid" />
   <br />
-  <mat-slide-toggle [(ngModel)]="hidePlayerRatings">Hide Player Ratings</mat-slide-toggle>
-  <h1>Main Teams</h1>
+  <mat-slide-toggle [(ngModel)]="hidePlayerRatings">Ocultar Puntaje de Jugadores</mat-slide-toggle>
+  <h1>Equipos Principales</h1>
   <div class="results">
     @for (team of getTeams(); track teams) {
     <div class="each-result">
       <h2>{{ team }}</h2>
       <div class="results-details">
-        <h4>Attack Rate: {{ getTeam(team).attack }}</h4>
-        <h4>Defense Rate: {{ getTeam(team).defense }}</h4>
-        <h4>Condition Rate: {{ getTeam(team).condition }}</h4>
-        <h4>Total Score: {{ getTeam(team).totalScore.toFixed(2) }}</h4>
+        <h4>Ataque media: {{ getTeam(team).attack }}</h4>
+        <h4>Defensa media: {{ getTeam(team).defense }}</h4>
+        <h4>Estado media: {{ getTeam(team).condition }}</h4>
+        <h4>Puntaje total: {{ getTeam(team).totalScore.toFixed(2) }}</h4>
       </div>
       @for (player of getTeam(team).squad; track teams;let i = $index) {
       <span class="each-player" [ngClass]="hidePlayerRatings ? 'center-content' : ''">
@@ -119,16 +118,16 @@
     }
   </div>
   <hr class="solid" />
-  <h1>Alternate Teams</h1>
+  <h1>Equipos Alternativos</h1>
   <div class="results">
     @for (team of getTeamsAlternate(); track teamsAlternate) {
     <div class="each-result">
       <h2>{{ team }}</h2>
       <div class="results-details">
-        <h4>Attack Rate: {{ getTeamAlternate(team).attack }}</h4>
-        <h4>Defense Rate: {{ getTeamAlternate(team).defense }}</h4>
-        <h4>Condition Rate: {{ getTeamAlternate(team).condition }}</h4>
-        <h4>Total Score: {{ getTeamAlternate(team).totalScore.toFixed(2) }}</h4>
+        <h4>Ataque media: {{ getTeamAlternate(team).attack }}</h4>
+        <h4>Defensa media: {{ getTeamAlternate(team).defense }}</h4>
+        <h4>Estado media: {{ getTeamAlternate(team).condition }}</h4>
+        <h4>Puntaje total: {{ getTeamAlternate(team).totalScore.toFixed(2) }}</h4>
       </div>
       @for (player of getTeamAlternate(team).squad; track teamsAlternate;let i =
       $index) {
@@ -151,15 +150,5 @@
     }
   </div>
   } }
-  <div id="repoInfo">
-    <a class="github-button" href="https://github.com/Gnyblast"
-      data-color-scheme="no-preference: light; light: light; dark: light;" aria-label="Follow @Gnyblast on GitHub">Follow
-      &#64;Gnyblast</a>
-    <a class="github-button" href="https://github.com/Gnyblast/Futsal-Team-Builder/subscription"
-      data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-eye"
-      aria-label="Watch Gnyblast/Futsal-Team-Builder on GitHub">Watch</a>
-    <a class="github-button" href="https://github.com/Gnyblast/Futsal-Team-Builder"
-      data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-star"
-      aria-label="Star Gnyblast/Futsal-Team-Builder on GitHub">Star</a>
-  </div>
+
 </div>
